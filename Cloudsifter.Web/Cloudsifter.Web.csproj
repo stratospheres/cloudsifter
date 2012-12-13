@@ -64,6 +64,9 @@
     <Content Include="apple-touch-icon-72x72-precomposed.png" />
     <Content Include="apple-touch-icon-precomposed.png" />
     <Content Include="apple-touch-icon.png" />
+    <Content Include="css\main.css" />
+    <Content Include="css\normalize.css" />
+    <Content Include="css\normalize.min.css" />
     <Content Include="css\style-blue.css" />
     <Content Include="css\style-brown.css" />
     <Content Include="css\style-green.css" />

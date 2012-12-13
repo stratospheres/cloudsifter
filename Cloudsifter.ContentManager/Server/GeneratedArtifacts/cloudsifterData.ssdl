@@ -1,0 +1,226 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="cloudsifterDataStore" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+  <EntityContainer Name="cloudsifterDataStore">
+    <EntitySet Name="Categories" EntityType="cloudsifterDataStore.Category" store:Type="Tables" Schema="dbo" Table="Category" />
+    <EntitySet Name="Links" EntityType="cloudsifterDataStore.Link" store:Type="Tables" Schema="dbo" Table="Link" />
+    <EntitySet Name="LinkCategories" EntityType="cloudsifterDataStore.LinkCategory" store:Type="Tables" Schema="dbo" Table="LinkCategory" />
+    <EntitySet Name="LinkSpotters" EntityType="cloudsifterDataStore.LinkSpotter" store:Type="Tables" Schema="dbo" Table="LinkSpotter" />
+    <EntitySet Name="LinkSpotterLinks" EntityType="cloudsifterDataStore.LinkSpotterLink" store:Type="Tables" Schema="dbo" Table="LinkSpotterLink" />
+    <EntitySet Name="LinkSpotterUnprocessedLinks" EntityType="cloudsifterDataStore.LinkSpotterUnprocessedLink" store:Type="Tables" Schema="dbo" Table="LinkSpotterUnprocessedLink" />
+    <EntitySet Name="Newsletters" EntityType="cloudsifterDataStore.Newsletter" store:Type="Tables" Schema="dbo" Table="Newsletter" />
+    <EntitySet Name="UnprocessedLinks" EntityType="cloudsifterDataStore.UnprocessedLink" store:Type="Tables" Schema="dbo" Table="UnprocessedLink" />
+    <AssociationSet Name="FK_Link_Link" Association="cloudsifterDataStore.FK_Link_Link">
+      <End Role="Link" EntitySet="Links" />
+      <End Role="Link1" EntitySet="Links" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Link_Newsletter" Association="cloudsifterDataStore.FK_Link_Newsletter">
+      <End Role="Newsletter" EntitySet="Newsletters" />
+      <End Role="Link" EntitySet="Links" />
+    </AssociationSet>
+    <AssociationSet Name="FK_LinkCategory_Category" Association="cloudsifterDataStore.FK_LinkCategory_Category">
+      <End Role="Category" EntitySet="Categories" />
+      <End Role="LinkCategory" EntitySet="LinkCategories" />
+    </AssociationSet>
+    <AssociationSet Name="FK_LinkCategory_Link" Association="cloudsifterDataStore.FK_LinkCategory_Link">
+      <End Role="Link" EntitySet="Links" />
+      <End Role="LinkCategory" EntitySet="LinkCategories" />
+    </AssociationSet>
+    <AssociationSet Name="FK_LinkSpotterLink_Link" Association="cloudsifterDataStore.FK_LinkSpotterLink_Link">
+      <End Role="Link" EntitySet="Links" />
+      <End Role="LinkSpotterLink" EntitySet="LinkSpotterLinks" />
+    </AssociationSet>
+    <AssociationSet Name="FK_LinkSpotterLink_LinkSpotter" Association="cloudsifterDataStore.FK_LinkSpotterLink_LinkSpotter">
+      <End Role="LinkSpotter" EntitySet="LinkSpotters" />
+      <End Role="LinkSpotterLink" EntitySet="LinkSpotterLinks" />
+    </AssociationSet>
+    <AssociationSet Name="FK_LinkSpotterUnprocessedLink_LinkSpotter" Association="cloudsifterDataStore.FK_LinkSpotterUnprocessedLink_LinkSpotter">
+      <End Role="LinkSpotter" EntitySet="LinkSpotters" />
+      <End Role="LinkSpotterUnprocessedLink" EntitySet="LinkSpotterUnprocessedLinks" />
+    </AssociationSet>
+    <AssociationSet Name="FK_LinkSpotterUnprocessedLink_UnprocessedLink" Association="cloudsifterDataStore.FK_LinkSpotterUnprocessedLink_UnprocessedLink">
+      <End Role="UnprocessedLink" EntitySet="UnprocessedLinks" />
+      <End Role="LinkSpotterUnprocessedLink" EntitySet="LinkSpotterUnprocessedLinks" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Category">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="100" />
+    <Property Name="SortOrder" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Link">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="Title" Type="nvarchar" Nullable="false" MaxLength="200" />
+    <Property Name="URL" Type="nvarchar" Nullable="false" MaxLength="300" />
+    <Property Name="Description" Type="ntext" Nullable="false" />
+    <Property Name="PlugImageURL150x150" Type="nvarchar" Nullable="false" MaxLength="200" />
+    <Property Name="ParentLinkId" Type="int" />
+    <Property Name="NewsletterId" Type="int" />
+  </EntityType>
+  <EntityType Name="LinkCategory">
+    <Key>
+      <PropertyRef Name="LinkId" />
+      <PropertyRef Name="CategoryId" />
+    </Key>
+    <Property Name="LinkId" Type="int" Nullable="false" />
+    <Property Name="CategoryId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="LinkSpotter">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="FullName" Type="nvarchar" Nullable="false" MaxLength="100" />
+    <Property Name="URL" Type="nvarchar" MaxLength="300" />
+    <Property Name="PUID" Type="nvarchar" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="LinkSpotterLink">
+    <Key>
+      <PropertyRef Name="LinkSpotterId" />
+      <PropertyRef Name="LinkId" />
+    </Key>
+    <Property Name="LinkSpotterId" Type="int" Nullable="false" />
+    <Property Name="LinkId" Type="int" Nullable="false" />
+    <Property Name="TimeSpotted" Type="datetime" />
+  </EntityType>
+  <EntityType Name="LinkSpotterUnprocessedLink">
+    <Key>
+      <PropertyRef Name="LinkSpotterId" />
+      <PropertyRef Name="UnprocessedLinkId" />
+    </Key>
+    <Property Name="LinkSpotterId" Type="int" Nullable="false" />
+    <Property Name="UnprocessedLinkId" Type="int" Nullable="false" />
+    <Property Name="ReportedDate" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Newsletter">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="100" />
+    <Property Name="Description" Type="nvarchar(max)" />
+    <Property Name="PublishDate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="UnprocessedLink">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="Title" Type="nvarchar" MaxLength="200" />
+    <Property Name="URL" Type="nvarchar" Nullable="false" MaxLength="300" />
+    <Property Name="Description" Type="ntext" />
+  </EntityType>
+  <Association Name="FK_Link_Link">
+    <End Role="Link" Type="cloudsifterDataStore.Link" Multiplicity="0..1" />
+    <End Role="Link1" Type="cloudsifterDataStore.Link" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Link">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Link1">
+        <PropertyRef Name="ParentLinkId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Link_Newsletter">
+    <End Role="Newsletter" Type="cloudsifterDataStore.Newsletter" Multiplicity="0..1" />
+    <End Role="Link" Type="cloudsifterDataStore.Link" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Newsletter">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Link">
+        <PropertyRef Name="NewsletterId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_LinkCategory_Category">
+    <End Role="Category" Type="cloudsifterDataStore.Category" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="LinkCategory" Type="cloudsifterDataStore.LinkCategory" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Category">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="LinkCategory">
+        <PropertyRef Name="CategoryId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_LinkCategory_Link">
+    <End Role="Link" Type="cloudsifterDataStore.Link" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="LinkCategory" Type="cloudsifterDataStore.LinkCategory" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Link">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="LinkCategory">
+        <PropertyRef Name="LinkId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_LinkSpotterLink_Link">
+    <End Role="Link" Type="cloudsifterDataStore.Link" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="LinkSpotterLink" Type="cloudsifterDataStore.LinkSpotterLink" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Link">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="LinkSpotterLink">
+        <PropertyRef Name="LinkId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_LinkSpotterLink_LinkSpotter">
+    <End Role="LinkSpotter" Type="cloudsifterDataStore.LinkSpotter" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="LinkSpotterLink" Type="cloudsifterDataStore.LinkSpotterLink" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="LinkSpotter">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="LinkSpotterLink">
+        <PropertyRef Name="LinkSpotterId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_LinkSpotterUnprocessedLink_LinkSpotter">
+    <End Role="LinkSpotter" Type="cloudsifterDataStore.LinkSpotter" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="LinkSpotterUnprocessedLink" Type="cloudsifterDataStore.LinkSpotterUnprocessedLink" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="LinkSpotter">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="LinkSpotterUnprocessedLink">
+        <PropertyRef Name="LinkSpotterId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_LinkSpotterUnprocessedLink_UnprocessedLink">
+    <End Role="UnprocessedLink" Type="cloudsifterDataStore.UnprocessedLink" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="LinkSpotterUnprocessedLink" Type="cloudsifterDataStore.LinkSpotterUnprocessedLink" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UnprocessedLink">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="LinkSpotterUnprocessedLink">
+        <PropertyRef Name="UnprocessedLinkId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

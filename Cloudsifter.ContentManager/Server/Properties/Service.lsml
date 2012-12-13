@@ -1,0 +1,433 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ModelFragment xmlns="http://schemas.microsoft.com/LightSwitch/2010/xaml/model">
+  <ServiceApplication
+    Name="LightSwitchServiceApplication"
+    Version="1.0.0.0">
+    <ServiceApplication.Attributes>
+      <ModuleNamespace
+        Namespace="LightSwitchApplication" />
+    </ServiceApplication.Attributes>
+  </ServiceApplication>
+  <DataService
+    DataProvider="EntityFrameworkDataProvider"
+    EntityContainer="LightSwitchCommonModule:cloudsifterData"
+    Name="cloudsifterDataDataService">
+    <DataService.ConnectionProperties>
+      <ConnectionProperty
+        Name="DataProviderName"
+        Value="91510608-8809-4020-8897-fba057e22d54" />
+      <ConnectionProperty
+        Name="DataSourceName"
+        Value="067ea0d9-ba62-43f7-9106-34930c60c528" />
+      <ConnectionProperty
+        Name="ProviderInvariantName"
+        Value="System.Data.SqlClient" />
+      <ConnectionProperty
+        Name="SafeConnectionString"
+        Value="Data Source=mr771d1jat.database.windows.net;Initial Catalog=cloudsifter;Persist Security Info=True;User ID=adam" />
+      <ConnectionProperty
+        Name="ConnectionStringGuid"
+        Value="80106909-8834-4348-a170-3c865d5977a6" />
+      <ConnectionProperty
+        Name="ProviderManifestToken"
+        Value="2008" />
+    </DataService.ConnectionProperties>
+    <EntitySetMapping
+      EntitySet="Categories">
+      <EntitySetMapping.Attributes>
+        <SsdlEntitySet
+          Schema="dbo"
+          Table="Category" />
+        <SsdlProperty
+          Name="Id"
+          Nullable="False"
+          Property="LightSwitchCommonModule:Category/Properties[Id]"
+          StoreGeneratedPattern="Identity"
+          Type="int" />
+        <SsdlProperty
+          MaxLength="100"
+          Name="Name"
+          Nullable="False"
+          Property="LightSwitchCommonModule:Category/Properties[Name]"
+          Type="nvarchar" />
+        <SsdlProperty
+          Name="SortOrder"
+          Nullable="False"
+          Property="LightSwitchCommonModule:Category/Properties[SortOrder]"
+          Type="int" />
+      </EntitySetMapping.Attributes>
+    </EntitySetMapping>
+    <EntitySetMapping
+      EntitySet="Links">
+      <EntitySetMapping.Attributes>
+        <SsdlEntitySet
+          Schema="dbo"
+          Table="Link" />
+        <SsdlProperty
+          Name="Id"
+          Nullable="False"
+          Property="LightSwitchCommonModule:Link/Properties[Id]"
+          StoreGeneratedPattern="Identity"
+          Type="int" />
+        <SsdlProperty
+          MaxLength="200"
+          Name="Title"
+          Nullable="False"
+          Property="LightSwitchCommonModule:Link/Properties[Title]"
+          Type="nvarchar" />
+        <SsdlProperty
+          MaxLength="300"
+          Name="URL"
+          Nullable="False"
+          Property="LightSwitchCommonModule:Link/Properties[URL]"
+          Type="nvarchar" />
+        <SsdlProperty
+          Name="Description"
+          Nullable="False"
+          Property="LightSwitchCommonModule:Link/Properties[Description]"
+          Type="ntext" />
+        <SsdlProperty
+          MaxLength="200"
+          Name="PlugImageURL150x150"
+          Nullable="False"
+          Property="LightSwitchCommonModule:Link/Properties[PlugImageURL150x150]"
+          Type="nvarchar" />
+        <SsdlForeignKeyProperty
+          Name="ParentLinkId"
+          Nullable="True"
+          PropertyName="ParentLinkId"
+          Type="int" />
+        <SsdlForeignKeyProperty
+          Name="NewsletterId"
+          Nullable="True"
+          PropertyName="NewsletterId"
+          Type="int" />
+      </EntitySetMapping.Attributes>
+    </EntitySetMapping>
+    <EntitySetMapping
+      EntitySet="LinkCategories">
+      <EntitySetMapping.Attributes>
+        <SsdlEntitySet
+          Schema="dbo"
+          Table="LinkCategory" />
+        <SsdlProperty
+          Name="LinkId"
+          Nullable="False"
+          Property="LightSwitchCommonModule:LinkCategory/Properties[LinkId]"
+          Type="int" />
+        <SsdlProperty
+          Name="CategoryId"
+          Nullable="False"
+          Property="LightSwitchCommonModule:LinkCategory/Properties[CategoryId]"
+          Type="int" />
+      </EntitySetMapping.Attributes>
+    </EntitySetMapping>
+    <EntitySetMapping
+      EntitySet="LinkSpotters">
+      <EntitySetMapping.Attributes>
+        <SsdlEntitySet
+          Schema="dbo"
+          Table="LinkSpotter" />
+        <SsdlProperty
+          Name="Id"
+          Nullable="False"
+          Property="LightSwitchCommonModule:LinkSpotter/Properties[Id]"
+          StoreGeneratedPattern="Identity"
+          Type="int" />
+        <SsdlProperty
+          MaxLength="100"
+          Name="FullName"
+          Nullable="False"
+          Property="LightSwitchCommonModule:LinkSpotter/Properties[FullName]"
+          Type="nvarchar" />
+        <SsdlProperty
+          MaxLength="300"
+          Name="URL"
+          Nullable="True"
+          Property="LightSwitchCommonModule:LinkSpotter/Properties[URL]"
+          Type="nvarchar" />
+        <SsdlProperty
+          MaxLength="100"
+          Name="PUID"
+          Nullable="True"
+          Property="LightSwitchCommonModule:LinkSpotter/Properties[PUID]"
+          Type="nvarchar" />
+      </EntitySetMapping.Attributes>
+    </EntitySetMapping>
+    <EntitySetMapping
+      EntitySet="LinkSpotterLinks">
+      <EntitySetMapping.Attributes>
+        <SsdlEntitySet
+          Schema="dbo"
+          Table="LinkSpotterLink" />
+        <SsdlProperty
+          Name="LinkSpotterId"
+          Nullable="False"
+          Property="LightSwitchCommonModule:LinkSpotterLink/Properties[LinkSpotterId]"
+          Type="int" />
+        <SsdlProperty
+          Name="LinkId"
+          Nullable="False"
+          Property="LightSwitchCommonModule:LinkSpotterLink/Properties[LinkId]"
+          Type="int" />
+        <SsdlProperty
+          Name="TimeSpotted"
+          Nullable="True"
+          Property="LightSwitchCommonModule:LinkSpotterLink/Properties[TimeSpotted]"
+          Type="datetime" />
+      </EntitySetMapping.Attributes>
+    </EntitySetMapping>
+    <EntitySetMapping
+      EntitySet="LinkSpotterUnprocessedLinks">
+      <EntitySetMapping.Attributes>
+        <SsdlEntitySet
+          Schema="dbo"
+          Table="LinkSpotterUnprocessedLink" />
+        <SsdlProperty
+          Name="LinkSpotterId"
+          Nullable="False"
+          Property="LightSwitchCommonModule:LinkSpotterUnprocessedLink/Properties[LinkSpotterId]"
+          Type="int" />
+        <SsdlProperty
+          Name="UnprocessedLinkId"
+          Nullable="False"
+          Property="LightSwitchCommonModule:LinkSpotterUnprocessedLink/Properties[UnprocessedLinkId]"
+          Type="int" />
+        <SsdlProperty
+          Name="ReportedDate"
+          Nullable="False"
+          Property="LightSwitchCommonModule:LinkSpotterUnprocessedLink/Properties[ReportedDate]"
+          Type="datetime" />
+      </EntitySetMapping.Attributes>
+    </EntitySetMapping>
+    <EntitySetMapping
+      EntitySet="Newsletters">
+      <EntitySetMapping.Attributes>
+        <SsdlEntitySet
+          Schema="dbo"
+          Table="Newsletter" />
+        <SsdlProperty
+          Name="Id"
+          Nullable="False"
+          Property="LightSwitchCommonModule:Newsletter/Properties[Id]"
+          StoreGeneratedPattern="Identity"
+          Type="int" />
+        <SsdlProperty
+          MaxLength="100"
+          Name="Name"
+          Nullable="False"
+          Property="LightSwitchCommonModule:Newsletter/Properties[Name]"
+          Type="nvarchar" />
+        <SsdlProperty
+          Name="Description"
+          Nullable="True"
+          Property="LightSwitchCommonModule:Newsletter/Properties[Description]"
+          Type="nvarchar(max)" />
+        <SsdlProperty
+          Name="PublishDate"
+          Nullable="True"
+          Property="LightSwitchCommonModule:Newsletter/Properties[PublishDate]"
+          Type="datetime" />
+      </EntitySetMapping.Attributes>
+    </EntitySetMapping>
+    <EntitySetMapping
+      EntitySet="UnprocessedLinks">
+      <EntitySetMapping.Attributes>
+        <SsdlEntitySet
+          Schema="dbo"
+          Table="UnprocessedLink" />
+        <SsdlProperty
+          Name="Id"
+          Nullable="False"
+          Property="LightSwitchCommonModule:UnprocessedLink/Properties[Id]"
+          StoreGeneratedPattern="Identity"
+          Type="int" />
+        <SsdlProperty
+          MaxLength="200"
+          Name="Title"
+          Nullable="True"
+          Property="LightSwitchCommonModule:UnprocessedLink/Properties[Title]"
+          Type="nvarchar" />
+        <SsdlProperty
+          MaxLength="300"
+          Name="URL"
+          Nullable="False"
+          Property="LightSwitchCommonModule:UnprocessedLink/Properties[URL]"
+          Type="nvarchar" />
+        <SsdlProperty
+          Name="Description"
+          Nullable="True"
+          Property="LightSwitchCommonModule:UnprocessedLink/Properties[Description]"
+          Type="ntext" />
+      </EntitySetMapping.Attributes>
+    </EntitySetMapping>
+    <AssociationSetMapping
+      AssociationSet="FK_Link_Link">
+      <AssociationSetMapping.Attributes>
+        <SsdlAssociationSet
+          Name="FK_Link_Link" />
+        <SsdlAssociationSetEnd
+          End="LightSwitchCommonModule:cloudsifterData/Members[FK_Link_Link]/Members[Link]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="Id" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+        <SsdlAssociationSetEnd
+          End="LightSwitchCommonModule:cloudsifterData/Members[FK_Link_Link]/Members[Link1]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="ParentLinkId" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+      </AssociationSetMapping.Attributes>
+    </AssociationSetMapping>
+    <AssociationSetMapping
+      AssociationSet="FK_Link_Newsletter">
+      <AssociationSetMapping.Attributes>
+        <SsdlAssociationSet
+          Name="FK_Link_Newsletter" />
+        <SsdlAssociationSetEnd
+          End="LightSwitchCommonModule:cloudsifterData/Members[FK_Link_Newsletter]/Members[Newsletter]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="Id" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+        <SsdlAssociationSetEnd
+          End="LightSwitchCommonModule:cloudsifterData/Members[FK_Link_Newsletter]/Members[Link]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="NewsletterId" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+      </AssociationSetMapping.Attributes>
+    </AssociationSetMapping>
+    <AssociationSetMapping
+      AssociationSet="FK_LinkCategory_Category">
+      <AssociationSetMapping.Attributes>
+        <SsdlAssociationSet
+          Name="FK_LinkCategory_Category" />
+        <SsdlAssociationSetEnd
+          End="LightSwitchCommonModule:cloudsifterData/Members[FK_LinkCategory_Category]/Members[Category]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="Id" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+        <SsdlAssociationSetEnd
+          End="LightSwitchCommonModule:cloudsifterData/Members[FK_LinkCategory_Category]/Members[LinkCategory]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="CategoryId" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+      </AssociationSetMapping.Attributes>
+    </AssociationSetMapping>
+    <AssociationSetMapping
+      AssociationSet="FK_LinkCategory_Link">
+      <AssociationSetMapping.Attributes>
+        <SsdlAssociationSet
+          Name="FK_LinkCategory_Link" />
+        <SsdlAssociationSetEnd
+          End="LightSwitchCommonModule:cloudsifterData/Members[FK_LinkCategory_Link]/Members[Link]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="Id" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+        <SsdlAssociationSetEnd
+          End="LightSwitchCommonModule:cloudsifterData/Members[FK_LinkCategory_Link]/Members[LinkCategory]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="LinkId" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+      </AssociationSetMapping.Attributes>
+    </AssociationSetMapping>
+    <AssociationSetMapping
+      AssociationSet="FK_LinkSpotterLink_Link">
+      <AssociationSetMapping.Attributes>
+        <SsdlAssociationSet
+          Name="FK_LinkSpotterLink_Link" />
+        <SsdlAssociationSetEnd
+          End="LightSwitchCommonModule:cloudsifterData/Members[FK_LinkSpotterLink_Link]/Members[Link]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="Id" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+        <SsdlAssociationSetEnd
+          End="LightSwitchCommonModule:cloudsifterData/Members[FK_LinkSpotterLink_Link]/Members[LinkSpotterLink]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="LinkId" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+      </AssociationSetMapping.Attributes>
+    </AssociationSetMapping>
+    <AssociationSetMapping
+      AssociationSet="FK_LinkSpotterLink_LinkSpotter">
+      <AssociationSetMapping.Attributes>
+        <SsdlAssociationSet
+          Name="FK_LinkSpotterLink_LinkSpotter" />
+        <SsdlAssociationSetEnd
+          End="LightSwitchCommonModule:cloudsifterData/Members[FK_LinkSpotterLink_LinkSpotter]/Members[LinkSpotter]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="Id" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+        <SsdlAssociationSetEnd
+          End="LightSwitchCommonModule:cloudsifterData/Members[FK_LinkSpotterLink_LinkSpotter]/Members[LinkSpotterLink]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="LinkSpotterId" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+      </AssociationSetMapping.Attributes>
+    </AssociationSetMapping>
+    <AssociationSetMapping
+      AssociationSet="FK_LinkSpotterUnprocessedLink_LinkSpotter">
+      <AssociationSetMapping.Attributes>
+        <SsdlAssociationSet
+          Name="FK_LinkSpotterUnprocessedLink_LinkSpotter" />
+        <SsdlAssociationSetEnd
+          End="LightSwitchCommonModule:cloudsifterData/Members[FK_LinkSpotterUnprocessedLink_LinkSpotter]/Members[LinkSpotter]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="Id" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+        <SsdlAssociationSetEnd
+          End="LightSwitchCommonModule:cloudsifterData/Members[FK_LinkSpotterUnprocessedLink_LinkSpotter]/Members[LinkSpotterUnprocessedLink]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="LinkSpotterId" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+      </AssociationSetMapping.Attributes>
+    </AssociationSetMapping>
+    <AssociationSetMapping
+      AssociationSet="FK_LinkSpotterUnprocessedLink_UnprocessedLink">
+      <AssociationSetMapping.Attributes>
+        <SsdlAssociationSet
+          Name="FK_LinkSpotterUnprocessedLink_UnprocessedLink" />
+        <SsdlAssociationSetEnd
+          End="LightSwitchCommonModule:cloudsifterData/Members[FK_LinkSpotterUnprocessedLink_UnprocessedLink]/Members[UnprocessedLink]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="Id" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+        <SsdlAssociationSetEnd
+          End="LightSwitchCommonModule:cloudsifterData/Members[FK_LinkSpotterUnprocessedLink_UnprocessedLink]/Members[LinkSpotterUnprocessedLink]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="UnprocessedLinkId" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+      </AssociationSetMapping.Attributes>
+    </AssociationSetMapping>
+  </DataService>
+</ModelFragment>

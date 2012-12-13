@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<ModelDocumentManifest xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Documents>
+    <Document FullPath="C:\Users\Adam\SkyDrive\adam\Projects\Cloudsifter\cloudsifter\Cloudsifter.ContentManager\Client\Properties\Client.lsml" Checksum="D6D0AC00CE2DA389158041ADBD2324F67A78D95B2AF8117895434495A025B989" />
+    <Document FullPath="C:\Users\Adam\SkyDrive\adam\Projects\Cloudsifter\cloudsifter\Cloudsifter.ContentManager\Common\Properties\Common.lsml" Checksum="48678CC67939345D34EF7FB1D43C18C3714F60AAA5A5CA81E9D275E823DF86E8" />
+  </Documents>
+</ModelDocumentManifest>

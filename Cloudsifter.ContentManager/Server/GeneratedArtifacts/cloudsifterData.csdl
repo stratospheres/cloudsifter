@@ -1,0 +1,242 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" Namespace="LightSwitchApplication" Alias="Self" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+  <EntityType Name="Category">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Edm.Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="Edm.String" Nullable="false" MaxLength="100" ConcurrencyMode="Fixed" />
+    <Property Name="SortOrder" Type="Edm.Int32" Nullable="false" ConcurrencyMode="Fixed" />
+    <NavigationProperty Name="LinkCategories" Relationship="LightSwitchApplication.FK_LinkCategory_Category" ToRole="LinkCategory" FromRole="Category" />
+  </EntityType>
+  <EntityType Name="Link">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Edm.Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Title" Type="Edm.String" Nullable="false" MaxLength="200" ConcurrencyMode="Fixed" />
+    <Property Name="URL" Type="Edm.String" Nullable="false" MaxLength="300" ConcurrencyMode="Fixed" />
+    <Property Name="Description" Type="Edm.String" Nullable="false" MaxLength="Max" />
+    <Property Name="PlugImageURL150x150" Type="Edm.String" Nullable="false" MaxLength="200" ConcurrencyMode="Fixed" />
+    <Property Name="ParentLinkId" Type="Edm.Int32" ConcurrencyMode="Fixed" />
+    <Property Name="NewsletterId" Type="Edm.Int32" ConcurrencyMode="Fixed" />
+    <NavigationProperty Name="Links" Relationship="LightSwitchApplication.FK_Link_Link" ToRole="Link1" FromRole="Link" />
+    <NavigationProperty Name="Link1" Relationship="LightSwitchApplication.FK_Link_Link" ToRole="Link" FromRole="Link1" />
+    <NavigationProperty Name="Newsletter" Relationship="LightSwitchApplication.FK_Link_Newsletter" ToRole="Newsletter" FromRole="Link" />
+    <NavigationProperty Name="LinkCategories" Relationship="LightSwitchApplication.FK_LinkCategory_Link" ToRole="LinkCategory" FromRole="Link" />
+    <NavigationProperty Name="LinkSpotterLinks" Relationship="LightSwitchApplication.FK_LinkSpotterLink_Link" ToRole="LinkSpotterLink" FromRole="Link" />
+  </EntityType>
+  <EntityType Name="LinkCategory">
+    <Key>
+      <PropertyRef Name="LinkId" />
+      <PropertyRef Name="CategoryId" />
+    </Key>
+    <Property Name="LinkId" Type="Edm.Int32" Nullable="false" />
+    <Property Name="CategoryId" Type="Edm.Int32" Nullable="false" />
+    <NavigationProperty Name="Category" Relationship="LightSwitchApplication.FK_LinkCategory_Category" ToRole="Category" FromRole="LinkCategory" />
+    <NavigationProperty Name="Link" Relationship="LightSwitchApplication.FK_LinkCategory_Link" ToRole="Link" FromRole="LinkCategory" />
+  </EntityType>
+  <EntityType Name="LinkSpotter">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Edm.Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FullName" Type="Edm.String" Nullable="false" MaxLength="100" ConcurrencyMode="Fixed" />
+    <Property Name="URL" Type="Edm.String" MaxLength="300" ConcurrencyMode="Fixed" />
+    <Property Name="PUID" Type="Edm.String" MaxLength="100" ConcurrencyMode="Fixed" />
+    <NavigationProperty Name="LinkSpotterLinks" Relationship="LightSwitchApplication.FK_LinkSpotterLink_LinkSpotter" ToRole="LinkSpotterLink" FromRole="LinkSpotter" />
+    <NavigationProperty Name="LinkSpotterUnprocessedLinks" Relationship="LightSwitchApplication.FK_LinkSpotterUnprocessedLink_LinkSpotter" ToRole="LinkSpotterUnprocessedLink" FromRole="LinkSpotter" />
+  </EntityType>
+  <EntityType Name="LinkSpotterLink">
+    <Key>
+      <PropertyRef Name="LinkSpotterId" />
+      <PropertyRef Name="LinkId" />
+    </Key>
+    <Property Name="LinkSpotterId" Type="Edm.Int32" Nullable="false" />
+    <Property Name="LinkId" Type="Edm.Int32" Nullable="false" />
+    <Property Name="TimeSpotted" Type="Edm.DateTime" Precision="3" ConcurrencyMode="Fixed" />
+    <NavigationProperty Name="Link" Relationship="LightSwitchApplication.FK_LinkSpotterLink_Link" ToRole="Link" FromRole="LinkSpotterLink" />
+    <NavigationProperty Name="LinkSpotter" Relationship="LightSwitchApplication.FK_LinkSpotterLink_LinkSpotter" ToRole="LinkSpotter" FromRole="LinkSpotterLink" />
+  </EntityType>
+  <EntityType Name="LinkSpotterUnprocessedLink">
+    <Key>
+      <PropertyRef Name="LinkSpotterId" />
+      <PropertyRef Name="UnprocessedLinkId" />
+    </Key>
+    <Property Name="LinkSpotterId" Type="Edm.Int32" Nullable="false" />
+    <Property Name="UnprocessedLinkId" Type="Edm.Int32" Nullable="false" />
+    <Property Name="ReportedDate" Type="Edm.DateTime" Nullable="false" Precision="3" ConcurrencyMode="Fixed" />
+    <NavigationProperty Name="LinkSpotter" Relationship="LightSwitchApplication.FK_LinkSpotterUnprocessedLink_LinkSpotter" ToRole="LinkSpotter" FromRole="LinkSpotterUnprocessedLink" />
+    <NavigationProperty Name="UnprocessedLink" Relationship="LightSwitchApplication.FK_LinkSpotterUnprocessedLink_UnprocessedLink" ToRole="UnprocessedLink" FromRole="LinkSpotterUnprocessedLink" />
+  </EntityType>
+  <EntityType Name="Newsletter">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Edm.Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="Edm.String" Nullable="false" MaxLength="100" ConcurrencyMode="Fixed" />
+    <Property Name="Description" Type="Edm.String" MaxLength="Max" ConcurrencyMode="Fixed" />
+    <Property Name="PublishDate" Type="Edm.DateTime" Precision="3" ConcurrencyMode="Fixed" />
+    <NavigationProperty Name="Links" Relationship="LightSwitchApplication.FK_Link_Newsletter" ToRole="Link" FromRole="Newsletter" />
+  </EntityType>
+  <EntityType Name="UnprocessedLink">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Edm.Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Title" Type="Edm.String" MaxLength="200" ConcurrencyMode="Fixed" />
+    <Property Name="URL" Type="Edm.String" Nullable="false" MaxLength="300" ConcurrencyMode="Fixed" />
+    <Property Name="Description" Type="Edm.String" MaxLength="Max" />
+    <NavigationProperty Name="LinkSpotterUnprocessedLinks" Relationship="LightSwitchApplication.FK_LinkSpotterUnprocessedLink_UnprocessedLink" ToRole="LinkSpotterUnprocessedLink" FromRole="UnprocessedLink" />
+  </EntityType>
+  <Association Name="FK_Link_Link">
+    <End Role="Link" Type="LightSwitchApplication.Link" Multiplicity="0..1" />
+    <End Role="Link1" Type="LightSwitchApplication.Link" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Link">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Link1">
+        <PropertyRef Name="ParentLinkId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Link_Newsletter">
+    <End Role="Newsletter" Type="LightSwitchApplication.Newsletter" Multiplicity="0..1" />
+    <End Role="Link" Type="LightSwitchApplication.Link" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Newsletter">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Link">
+        <PropertyRef Name="NewsletterId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_LinkCategory_Category">
+    <End Role="Category" Type="LightSwitchApplication.Category" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="LinkCategory" Type="LightSwitchApplication.LinkCategory" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Category">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="LinkCategory">
+        <PropertyRef Name="CategoryId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_LinkCategory_Link">
+    <End Role="Link" Type="LightSwitchApplication.Link" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="LinkCategory" Type="LightSwitchApplication.LinkCategory" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Link">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="LinkCategory">
+        <PropertyRef Name="LinkId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_LinkSpotterLink_Link">
+    <End Role="Link" Type="LightSwitchApplication.Link" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="LinkSpotterLink" Type="LightSwitchApplication.LinkSpotterLink" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Link">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="LinkSpotterLink">
+        <PropertyRef Name="LinkId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_LinkSpotterLink_LinkSpotter">
+    <End Role="LinkSpotter" Type="LightSwitchApplication.LinkSpotter" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="LinkSpotterLink" Type="LightSwitchApplication.LinkSpotterLink" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="LinkSpotter">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="LinkSpotterLink">
+        <PropertyRef Name="LinkSpotterId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_LinkSpotterUnprocessedLink_LinkSpotter">
+    <End Role="LinkSpotter" Type="LightSwitchApplication.LinkSpotter" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="LinkSpotterUnprocessedLink" Type="LightSwitchApplication.LinkSpotterUnprocessedLink" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="LinkSpotter">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="LinkSpotterUnprocessedLink">
+        <PropertyRef Name="LinkSpotterId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_LinkSpotterUnprocessedLink_UnprocessedLink">
+    <End Role="UnprocessedLink" Type="LightSwitchApplication.UnprocessedLink" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="LinkSpotterUnprocessedLink" Type="LightSwitchApplication.LinkSpotterUnprocessedLink" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UnprocessedLink">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="LinkSpotterUnprocessedLink">
+        <PropertyRef Name="UnprocessedLinkId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="cloudsifterDataObjectContext" m:IsDefaultEntityContainer="true">
+    <EntitySet Name="Categories" EntityType="LightSwitchApplication.Category" />
+    <EntitySet Name="Links" EntityType="LightSwitchApplication.Link" />
+    <EntitySet Name="LinkCategories" EntityType="LightSwitchApplication.LinkCategory" />
+    <EntitySet Name="LinkSpotters" EntityType="LightSwitchApplication.LinkSpotter" />
+    <EntitySet Name="LinkSpotterLinks" EntityType="LightSwitchApplication.LinkSpotterLink" />
+    <EntitySet Name="LinkSpotterUnprocessedLinks" EntityType="LightSwitchApplication.LinkSpotterUnprocessedLink" />
+    <EntitySet Name="Newsletters" EntityType="LightSwitchApplication.Newsletter" />
+    <EntitySet Name="UnprocessedLinks" EntityType="LightSwitchApplication.UnprocessedLink" />
+    <AssociationSet Name="FK_Link_Link" Association="LightSwitchApplication.FK_Link_Link">
+      <End Role="Link" EntitySet="Links" />
+      <End Role="Link1" EntitySet="Links" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Link_Newsletter" Association="LightSwitchApplication.FK_Link_Newsletter">
+      <End Role="Newsletter" EntitySet="Newsletters" />
+      <End Role="Link" EntitySet="Links" />
+    </AssociationSet>
+    <AssociationSet Name="FK_LinkCategory_Category" Association="LightSwitchApplication.FK_LinkCategory_Category">
+      <End Role="Category" EntitySet="Categories" />
+      <End Role="LinkCategory" EntitySet="LinkCategories" />
+    </AssociationSet>
+    <AssociationSet Name="FK_LinkCategory_Link" Association="LightSwitchApplication.FK_LinkCategory_Link">
+      <End Role="Link" EntitySet="Links" />
+      <End Role="LinkCategory" EntitySet="LinkCategories" />
+    </AssociationSet>
+    <AssociationSet Name="FK_LinkSpotterLink_Link" Association="LightSwitchApplication.FK_LinkSpotterLink_Link">
+      <End Role="Link" EntitySet="Links" />
+      <End Role="LinkSpotterLink" EntitySet="LinkSpotterLinks" />
+    </AssociationSet>
+    <AssociationSet Name="FK_LinkSpotterLink_LinkSpotter" Association="LightSwitchApplication.FK_LinkSpotterLink_LinkSpotter">
+      <End Role="LinkSpotter" EntitySet="LinkSpotters" />
+      <End Role="LinkSpotterLink" EntitySet="LinkSpotterLinks" />
+    </AssociationSet>
+    <AssociationSet Name="FK_LinkSpotterUnprocessedLink_LinkSpotter" Association="LightSwitchApplication.FK_LinkSpotterUnprocessedLink_LinkSpotter">
+      <End Role="LinkSpotter" EntitySet="LinkSpotters" />
+      <End Role="LinkSpotterUnprocessedLink" EntitySet="LinkSpotterUnprocessedLinks" />
+    </AssociationSet>
+    <AssociationSet Name="FK_LinkSpotterUnprocessedLink_UnprocessedLink" Association="LightSwitchApplication.FK_LinkSpotterUnprocessedLink_UnprocessedLink">
+      <End Role="UnprocessedLink" EntitySet="UnprocessedLinks" />
+      <End Role="LinkSpotterUnprocessedLink" EntitySet="LinkSpotterUnprocessedLinks" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

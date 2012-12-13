@@ -1,0 +1,83 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+  <EntityContainerMapping CdmEntityContainer="cloudsifterDataObjectContext" StorageEntityContainer="cloudsifterDataStore">
+    <EntitySetMapping Name="Categories">
+      <EntityTypeMapping TypeName="IsTypeOf(LightSwitchApplication.Category)">
+        <MappingFragment StoreEntitySet="Categories">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="SortOrder" ColumnName="SortOrder" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Links">
+      <EntityTypeMapping TypeName="IsTypeOf(LightSwitchApplication.Link)">
+        <MappingFragment StoreEntitySet="Links">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="URL" ColumnName="URL" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="PlugImageURL150x150" ColumnName="PlugImageURL150x150" />
+          <ScalarProperty Name="ParentLinkId" ColumnName="ParentLinkId" />
+          <ScalarProperty Name="NewsletterId" ColumnName="NewsletterId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="LinkCategories">
+      <EntityTypeMapping TypeName="IsTypeOf(LightSwitchApplication.LinkCategory)">
+        <MappingFragment StoreEntitySet="LinkCategories">
+          <ScalarProperty Name="LinkId" ColumnName="LinkId" />
+          <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="LinkSpotters">
+      <EntityTypeMapping TypeName="IsTypeOf(LightSwitchApplication.LinkSpotter)">
+        <MappingFragment StoreEntitySet="LinkSpotters">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="FullName" ColumnName="FullName" />
+          <ScalarProperty Name="URL" ColumnName="URL" />
+          <ScalarProperty Name="PUID" ColumnName="PUID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="LinkSpotterLinks">
+      <EntityTypeMapping TypeName="IsTypeOf(LightSwitchApplication.LinkSpotterLink)">
+        <MappingFragment StoreEntitySet="LinkSpotterLinks">
+          <ScalarProperty Name="LinkSpotterId" ColumnName="LinkSpotterId" />
+          <ScalarProperty Name="LinkId" ColumnName="LinkId" />
+          <ScalarProperty Name="TimeSpotted" ColumnName="TimeSpotted" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="LinkSpotterUnprocessedLinks">
+      <EntityTypeMapping TypeName="IsTypeOf(LightSwitchApplication.LinkSpotterUnprocessedLink)">
+        <MappingFragment StoreEntitySet="LinkSpotterUnprocessedLinks">
+          <ScalarProperty Name="LinkSpotterId" ColumnName="LinkSpotterId" />
+          <ScalarProperty Name="UnprocessedLinkId" ColumnName="UnprocessedLinkId" />
+          <ScalarProperty Name="ReportedDate" ColumnName="ReportedDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Newsletters">
+      <EntityTypeMapping TypeName="IsTypeOf(LightSwitchApplication.Newsletter)">
+        <MappingFragment StoreEntitySet="Newsletters">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="PublishDate" ColumnName="PublishDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UnprocessedLinks">
+      <EntityTypeMapping TypeName="IsTypeOf(LightSwitchApplication.UnprocessedLink)">
+        <MappingFragment StoreEntitySet="UnprocessedLinks">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="URL" ColumnName="URL" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

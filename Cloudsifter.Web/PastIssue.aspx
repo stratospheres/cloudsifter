@@ -84,9 +84,9 @@ form#detailsform textarea {
 
                 <article>
                     <header>
-                        <h1>Issue Name</h1>
+                        <h1><asp:Literal ID="titleLiteral" runat="server" /></h1>
                         <p>
-                            Issue Description.
+                            <asp:Literal ID="descriptionLiteral" runat="server" />
                         </p>
                     </header>
 <asp:Repeater ID="newsletterRepeater" runat="server">

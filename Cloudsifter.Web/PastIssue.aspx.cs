@@ -33,7 +33,11 @@ namespace Cloudsifter.Web
 					// numbers seem legit - look this thing up...
 					Data.Repositories.Newsletter newsletterRepository = new Data.Repositories.Newsletter();
 					Data.Types.Newsletter newsletter = newsletterRepository.GetByMonthDayYear(month, day, year);
-					
+
+					// fill out the title and description
+					titleLiteral.Text = newsletter.Name;
+					descriptionLiteral.Text = newsletter.Description;
+
 					// save the Id so that the front end page can use it to parameterize the nested repeater calls
 					NewsletterId = newsletter.Id;
 
